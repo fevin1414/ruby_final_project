@@ -7,6 +7,8 @@ ruby "3.1.2"
 gem "rails", "~> 7.0.5"
 gem 'devise'
 gem 'activeadmin'
+gem 'sassc-rails'
+
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
