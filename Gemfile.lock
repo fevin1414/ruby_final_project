@@ -282,6 +282,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  formtastic (~> 4.0)
   importmap-rails
   jbuilder
   puma (~> 5.0)

@@ -8,6 +8,8 @@ gem "rails", "~> 7.0.5"
 gem 'devise'
 gem 'activeadmin'
 gem 'sassc-rails'
+gem 'formtastic', '~> 4.0'
+
 
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
