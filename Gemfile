@@ -9,6 +9,9 @@ gem 'devise'
 gem 'activeadmin'
 gem 'sassc-rails'
 gem 'formtastic', '~> 4.0'
+gem 'carrierwave'
+gem 'ransack'
+
 
 
 
