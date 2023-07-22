@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_21_083031) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_060534) do
   create_table "about_pages", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -55,17 +55,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_083031) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_images", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_images_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "stock"
     t.string "name"
     t.text "description"
     t.decimal "price"
-    t.integer "image_id"
+    t.integer "stock"
+    t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
-    t.string "thumbnail_image"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
@@ -82,5 +86,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_083031) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "product_images", "products"
   add_foreign_key "products", "categories"
 end
