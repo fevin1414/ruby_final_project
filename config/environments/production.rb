@@ -6,7 +6,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  config.active_storage.service = :google
+  config.active_storage.service = :gcs
 
 
   # Eager load code on boot. This eager loads most of Rails and
