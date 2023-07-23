@@ -1,0 +1,37 @@
+
+<h1>Your Cart</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td>
+          <%= form_with(url: update_item_cart_path, method: :post) do |form| %>
+            <%= form.hidden_field :product_id, value: product.id %>
+            <%= form.number_field :quantity, value: @cart.items[product.id.to_s], min: 1 %>
+            <%= form.submit 'Update' %>
+          <% end %>
+        </td>
+       <td><%= product.price * BigDecimal(@cart.items[product.id.to_s]) %></td>
+
+        <td>
+          <%= form_with(url: remove_item_cart_path, method: :post) do |form| %>
+            <%= form.hidden_field :product_id, value: product.id %>
+            <%= form.submit 'Remove' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h2>Total: <%= @cart.total %></h2>

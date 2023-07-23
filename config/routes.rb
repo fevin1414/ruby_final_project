@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  get 'carts/show'
   root 'products#index'
   resources :products, only: [:index, :show]
-  resources :categories, only: [:show]  # Add this line
+  resources :categories, only: [:show]
+  resource :cart, only: [:show] do
+    post 'add_item'
+    post 'remove_item'
+    post 'update_item'
+  end
 
   get 'about_pages/show'
   get 'contact_pages/show'

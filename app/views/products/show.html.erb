@@ -27,3 +27,9 @@
 <% if @product.product_images.drop(1).empty? %>
   <img src="https://lorempixel.com/200/200/" class="placeholder-image">
 <% end %>
+
+<%= form_with(url: add_item_cart_path, method: :post) do |form| %>
+  <%= form.hidden_field :product_id, value: @product.id %>
+  <%= form.number_field :quantity, value: 1, min: 1 %>
+  <%= form.submit 'Add to Cart' %>
+<% end %>
