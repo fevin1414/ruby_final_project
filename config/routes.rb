@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'products#index'
   resources :products, only: [:index, :show]
+  resources :categories, only: [:show]  # Add this line
 
   get 'about_pages/show'
   get 'contact_pages/show'
