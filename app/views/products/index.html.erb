@@ -1,0 +1,29 @@
+<h1>Available Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Thumbnail</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td>
+          <% if product.product_images.present? %>
+            <%= image_tag product.product_images.first.image.url(:thumbnail) %>
+          <% else %>
+          <%= image_tag 'https://lorempixel.com/200/200/', class: 'placeholder-image' %>
+
+          <% end %>
+        </td>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= link_to 'Details', product_path(product) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li class="product">
+          <%= link_to "Products", products_path %>
+        </li>
+        <!-- Add other navigation items as needed -->
+      </ul>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
