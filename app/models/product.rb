@@ -11,8 +11,8 @@ class Product < ApplicationRecord
   end
 
   scope :on_sale, -> { where(on_sale: true) }
-  scope :newly_added, -> { where('created_at >= ?', 3.days.ago) }
-  scope :recently_updated, -> { where('updated_at >= ?', 3.days.ago) }
+  scope :newly_added, -> { where('created_at >= ?', 1.days.ago) }
+  scope :recently_updated, -> { where('updated_at >= ?', 1.days.ago) }
 
   attribute :on_sale, :boolean, default: false
   attribute :newly_added, :boolean, default: false

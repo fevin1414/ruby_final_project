@@ -6,8 +6,19 @@
   <%= label_tag(:category, "Category:") %>
   <%= select_tag(:category, options_for_select([['All Products', nil]] + Category.all.map { |c| [c.name, c.id] }, selected: params[:category] || nil)) %>
 
+  <%= label_tag(:on_sale, "On Sale") %>
+  <%= check_box_tag(:on_sale, true, params[:on_sale].present?) %>
+
+  <%= label_tag(:newly_added, "Newly Added") %>
+  <%= check_box_tag(:newly_added, true, params[:newly_added].present?) %>
+
+  <%= label_tag(:recently_updated, "Recently Updated") %>
+  <%= check_box_tag(:recently_updated, true, params[:recently_updated].present?) %>
+
   <%= submit_tag("Search") %>
 <% end %>
+
+
 <table>
   <thead>
     <tr>
