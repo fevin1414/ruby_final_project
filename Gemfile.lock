@@ -360,6 +360,7 @@ DEPENDENCIES
   google-cloud-storage
   importmap-rails
   jbuilder
+  kaminari
   mini_magick
   puma (~> 5.0)
   rails (~> 7.0.5)
