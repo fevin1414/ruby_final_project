@@ -1,5 +1,13 @@
 <h1>Available Products</h1>
+<%= form_with(url: products_path, method: "get") do %>
+  <%= label_tag(:keyword, "Search for:") %>
+  <%= text_field_tag(:keyword, params[:keyword]) %>
 
+  <%= label_tag(:category, "Category:") %>
+  <%= select_tag(:category, options_for_select([['All Products', nil]] + Category.all.map { |c| [c.name, c.id] }, selected: params[:category] || nil)) %>
+
+  <%= submit_tag("Search") %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -16,8 +24,7 @@
           <% if product.product_images.present? %>
             <%= image_tag product.product_images.first.image.url(:thumbnail) %>
           <% else %>
-          <%= image_tag 'https://lorempixel.com/200/200/', class: 'placeholder-image' %>
-
+            <%= image_tag 'https://lorempixel.com/200/200/', class: 'placeholder-image' %>
           <% end %>
         </td>
         <td><%= product.name %></td>
