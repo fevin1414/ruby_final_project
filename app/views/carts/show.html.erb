@@ -6,7 +6,8 @@
 
 <h1>Your Cart</h1>
 <table>
-  <thead>
+  <!-- Cart table code here -->
+<thead>
     <tr>
       <th>Name</th>
       <th>Price</th>
@@ -39,4 +40,24 @@
     <% end %>
   </tbody>
 </table>
+<% if user_signed_in? %>
+  <h2>Your Addresses</h2>
+
+  <% @user.addresses.each do |address| %>
+    <div>
+      <p><%= address.street %>, <%= address.city %>, <%= address.province.name %></p>
+      <%= link_to 'Edit', edit_address_path(address) %>
+     <%= button_to 'Delete', address_path(address), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Add New Address', new_address_path %>
+<% end %>
+
 <h2>Total: <%= @cart.total %></h2>
+
+<% if user_signed_in? %>
+  <p>User ID: <%= current_user.id %></p>
+<% else %>
+  <p>Please log in to view your address and card details.</p>
+<% end %>

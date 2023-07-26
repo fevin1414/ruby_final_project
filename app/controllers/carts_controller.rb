@@ -1,8 +1,11 @@
 class CartsController < ApplicationController
   before_action :set_cart
+  before_action :set_user
 
   def show
     @products = Product.find(@cart.items.keys)
+    @addresses = Address.all
+
   end
 
   def add_item
@@ -32,4 +35,8 @@ class CartsController < ApplicationController
   def set_cart
     @cart = Cart.new(session)
   end
+  def set_user
+    @user = current_user || User.new
+  end
+
 end

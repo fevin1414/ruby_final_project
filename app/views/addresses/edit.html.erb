@@ -1,0 +1,22 @@
+<h1>Edit Address</h1>
+
+<%= form_with(model: @address, local: true) do |form| %>
+  <div>
+    <%= form.label :street %>
+    <%= form.text_field :street %>
+  </div>
+
+  <div>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :province %>
+    <%= form.collection_select :province_id, Province.order(:name), :id, :name %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
+<%= link_to 'Back', cart_path %>
+

@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   get 'user_dashboard', to: 'users#dashboard', as: 'user_dashboard'
 
   get 'contact_pages/show'
+  resources :addresses, only: [:index, :new, :create, :edit, :update, :destroy]
+
+
+
 
   devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
   # Active Admin routes for admin users
