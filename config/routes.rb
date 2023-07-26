@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   get 'carts/show'
-  root 'products#index'
-  resources :products, only: [:index, :show]
+
+  root 'application#choose_root_path' # Change the root route to point to choose_root_path
+
+  resources :products, only: [:index, :show] do
+    member do
+      get :view_in_3d
+    end
+  end
+
   resources :categories, only: [:show]
   resource :cart, only: [:show] do
     post 'add_item'
@@ -10,11 +17,11 @@ Rails.application.routes.draw do
   end
 
   get 'about_pages/show'
+  get 'user_dashboard', to: 'users#dashboard', as: 'user_dashboard'
+
   get 'contact_pages/show'
 
-  # Devise routes for regular users
-  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
-
+  devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
   # Active Admin routes for admin users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

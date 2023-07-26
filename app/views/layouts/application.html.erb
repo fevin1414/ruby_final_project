@@ -26,6 +26,18 @@
           </ul>
         </li>
         <li><%= link_to "Cart", cart_path %></li> <!-- Add this line -->
+
+        <% if user_signed_in? %> <!-- Check if the user is logged in -->
+          <li><%= link_to "Dashboard", user_dashboard_path %></li>
+        <%= form_for(resource, as: resource_name, url: destroy_user_session_path, method: :delete) do |f| %>
+  <%= f.submit "Logout" %>
+<% end %>
+
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% end %>
+
         <!-- Add other navigation items as needed -->
       </ul>
     </nav>

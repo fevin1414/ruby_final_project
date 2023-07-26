@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-
-  def index
-    # Add custom logic for user index page here
+  def dashboard
+    # Add any necessary logic here
   end
 end
