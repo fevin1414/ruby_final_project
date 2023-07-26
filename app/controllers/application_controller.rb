@@ -4,13 +4,12 @@ class ApplicationController < ActionController::Base
       if current_user.admin?
         redirect_to admin_root_path
       else
-        redirect_to users_root_path
+        redirect_to user_dashboard_path
       end
     else
       redirect_to products_path
     end
   end
-
 
   private
 
@@ -21,5 +20,9 @@ class ApplicationController < ActionController::Base
     else
       user_dashboard_path
     end
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    users_path # Use the correct route helper method: users_path
   end
 end
