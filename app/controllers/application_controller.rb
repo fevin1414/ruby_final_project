@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Breadcrumbable
+
   def choose_root_path
     if user_signed_in?
       if current_user.admin?

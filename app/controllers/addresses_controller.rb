@@ -1,5 +1,7 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
+  include Breadcrumbable
+
   def show
     @address = Address.find(params[:id])
   end

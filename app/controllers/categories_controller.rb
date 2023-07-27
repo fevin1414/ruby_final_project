@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  include Breadcrumbable
+
   def show
     @category = Category.find_by(id: params[:id])
     if @category

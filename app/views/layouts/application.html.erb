@@ -15,7 +15,8 @@
       <ul>
        <li><%= link_to "Contact", contact_path %></li>
     <li><%= link_to "About", about_path %></li>
-        <li><%= link_to "Admin", root_path %></li>
+       <li><%= link_to "Admin", admin_root_path %></li>
+
         <li class="product">
           <%= link_to "Products", products_path %>
         </li>
@@ -43,6 +44,9 @@
         <!-- Add other navigation items as needed -->
       </ul>
     </nav>
+<% @breadcrumbs&.each do |breadcrumb| %>
+  <%= link_to breadcrumb[:name], breadcrumb[:url] %> >
+<% end %>
 
     <%= yield %>
   </body>

@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  include Breadcrumbable
+
   def index
     @products = Product.all
 
@@ -27,7 +29,19 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-  end
 
+  end
+  def create
+    @product = Product.new(product_params)
+
+    # Set the newly added product as "on sale"
+    @product.on_sale = true
+
+    if @product.save
+      redirect_to @product, notice: 'Product was successfully created.'
+    else
+      render :new
+    end
+  end
   # You can add other actions as needed, such as new, create, etc.
 end
