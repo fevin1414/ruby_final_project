@@ -1,0 +1,21 @@
+<!-- app/views/checkout/index.html.erb -->
+<% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<h1>Select an Address</h1>
+<% if @addresses.any? %>
+  <ul>
+    <% @addresses.each do |address| %>
+      <li>
+        <%= radio_button_tag :address_id, address.id %>
+        <%= address.street %>, <%= address.city %>, <%= address.province.name %>
+      </li>
+    <% end %>
+  </ul>
+  <%= button_to 'Pay Now', checkout_path, method: :post, class: 'checkout-button' %>
+<% else %>
+  <p>No addresses found. Please add an address to continue.</p>
+<% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'checkout/index'
+  get 'checkout/create'
   get 'carts/show'
 
   root 'application#choose_root_path' # Change the root route to point to choose_root_path
@@ -33,6 +35,9 @@ Rails.application.routes.draw do
   # Other routes for your application can be added here.
   get '/contact', to: 'contact_pages#show'
   get '/about', to: 'about_pages#show'
+  get 'checkout', to: 'checkout#index'
+  post 'checkout', to: 'checkout#create'
+
   resources :users, only: [:show]
 
   # Add the custom route for users#index

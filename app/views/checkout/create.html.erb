@@ -1,0 +1,10 @@
+<!-- app/views/checkout/create.html.erb -->
+<% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<h1>Order Placed Successfully!</h1>
+<p>Selected Address:</p>
+<p><%= @selected_address.street %>, <%= @selected_address.city %>, <%= @selected_address.province.name %></p>
