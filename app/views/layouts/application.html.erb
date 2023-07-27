@@ -29,18 +29,16 @@
           </ul>
         </li>
         <li><%= link_to "Cart", cart_path %></li> <!-- Add this line -->
-
-       <% if user_signed_in? %>
-  <li><%= link_to "Home", user_dashboard_path %></li>
-  <%= form_for(:user, url: destroy_user_session_path, method: :delete) do |f| %>
-    <%= f.submit "Logout" %>
-  <% end %>
-<% else %>
-  <li><%= link_to "Login", new_user_session_path %></li>
-  <li><%= link_to "Sign Up", new_user_registration_path %></li>
-<% end %>
-
-
+<% if user_signed_in? %>
+      <li><%= link_to "Home", user_dashboard_path %></li>
+      <%= form_for(:user, url: destroy_user_session_path, method: :delete) do |f| %>
+        <%= f.submit "Logout" %>
+      <% end %>
+      <li><%= link_to "Profile", user_path(current_user) %></li>
+    <% else %>
+      <li><%= link_to "Login", new_user_session_path %></li>
+      <li><%= link_to "Sign Up", new_user_registration_path %></li>
+    <% end %>
         <!-- Add other navigation items as needed -->
       </ul>
     </nav>

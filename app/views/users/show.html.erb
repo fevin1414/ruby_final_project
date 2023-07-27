@@ -1,0 +1,16 @@
+<h1>User Profile</h1>
+
+<p><strong>Email:</strong> <%= @user.email %></p>
+<% if user_signed_in? %>
+  <h2>Your Addresses</h2>
+
+  <% @user.addresses.each do |address| %>
+    <div>
+      <p><%= address.street %>, <%= address.city %>, <%= address.province.name %></p>
+      <%= link_to 'Edit', edit_address_path(address) %>
+     <%= button_to 'Delete', address_path(address), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Add New Address', new_address_path %>
+<% end %>

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # Other routes for your application can be added here.
   get '/contact', to: 'contact_pages#show'
   get '/about', to: 'about_pages#show'
+  resources :users, only: [:show]
 
   # Add the custom route for users#index
   get 'users', to: 'users#index', as: 'users'
