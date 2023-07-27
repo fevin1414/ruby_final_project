@@ -1,4 +1,4 @@
-# app/controllers/checkout_controller.rb
+
 class CheckoutController < ApplicationController
   before_action :authenticate_user! # Ensure user is logged in to access checkout
 
