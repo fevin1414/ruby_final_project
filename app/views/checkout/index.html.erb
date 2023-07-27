@@ -20,3 +20,12 @@
 <% else %>
   <p>No addresses found. Please add an address to continue.</p>
 <% end %>
+
+<!-- app/views/checkout/index.html.erb -->
+<% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+
