@@ -1,3 +1,4 @@
+# cart.rb
 class Cart
   attr_reader :items
 
@@ -25,9 +26,16 @@ class Cart
   end
 
   def total
-    @items.sum { |product_id, quantity| Product.find(product_id).price * BigDecimal(quantity) }
+    @items.sum { |product_id, quantity| product_total(Product.find_by(id: product_id), quantity) }
   end
 
+  private
+
+  def product_total(product, quantity)
+    return 0 unless product
+
+    product.price * BigDecimal(quantity)
+  end
 
   def clear
     @session[:cart] = {}

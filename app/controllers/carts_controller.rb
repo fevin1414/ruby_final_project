@@ -3,9 +3,9 @@ class CartsController < ApplicationController
   before_action :set_user
 
   def show
-    @products = Product.find(@cart.items.keys)
+    product_ids = @cart.items.keys
+    @products = Product.where(id: product_ids)
     @addresses = Address.all
-
   end
 
   def add_item
