@@ -71,12 +71,7 @@ class Cart
   end
 
   def clear
-    if @user
-      @session[:cart] = {}
-      @items = @session[:cart]
-    else
-      @session.delete(:cart)
-      @items = {}
-    end
+    @session[:cart] = {}
+    @items = @session[:cart]
   end
 end
