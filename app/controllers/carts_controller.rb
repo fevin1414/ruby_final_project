@@ -1,5 +1,3 @@
-
-
 class CartsController < ApplicationController
   include Breadcrumbable
   before_action :set_cart
@@ -7,9 +5,14 @@ class CartsController < ApplicationController
   before_action :set_product, only: [:show, :add_item]  # Updated
 
   def show
-    product_ids = @cart.items.keys
-    @products = Product.where(id: product_ids)
-    @addresses = Address.all
+    if user_signed_in?
+      @shopping_cart = current_user.shopping_cart
+      @cart_items = @shopping_cart.cart_items.includes(:product)
+      @total = @shopping_cart.total_price
+    else
+      @cart_items = @cart.items.keys.map { |product_id| OpenStruct.new(product: Product.find(product_id), quantity: @cart.items[product_id]) }
+      @total = @cart.total
+    end
   end
 
   def add_item
@@ -38,12 +41,13 @@ class CartsController < ApplicationController
   private
 
   def set_cart
-    @cart = Cart.new(session)
-    if !current_user && session[:cache_cleared]
+    @cart = Cart.new(session, current_user)
+    if !current_user && session[:clear_cart_on_logout]
       @cart.clear_items
-      session[:cache_cleared] = false
+      session[:clear_cart_on_logout] = false
     end
   end
+
 
 
   def set_user

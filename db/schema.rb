@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_065352) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_011257) do
   create_table "about_pages", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -94,6 +94,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_065352) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "shopping_cart_id"
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["product_id"], name: "index_cart_items_on_product_id"
+    t.index ["shopping_cart_id"], name: "index_cart_items_on_shopping_cart_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -145,6 +157,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_065352) do
     t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
+  create_table "shopping_carts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.decimal "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shopping_carts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -161,7 +181,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_065352) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_items", "products"
+  add_foreign_key "cart_items", "shopping_carts"
+  add_foreign_key "cart_items", "shopping_carts", column: "cart_id"
   add_foreign_key "product_images", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "reviews", "products"
+  add_foreign_key "shopping_carts", "users"
 end
