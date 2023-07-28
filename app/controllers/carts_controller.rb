@@ -13,6 +13,7 @@ class CartsController < ApplicationController
       @cart_items = @cart.items.keys.map { |product_id| OpenStruct.new(product: Product.find(product_id), quantity: @cart.items[product_id]) }
       @total = @cart.total
     end
+    session[:cart_total] = @total
   end
 
   def add_item

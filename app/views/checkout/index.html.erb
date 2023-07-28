@@ -15,17 +15,18 @@
       </li>
     <% end %>
   </ul>
- </ul><h2>Subtotal: <%= @cart.total %></h2>
+ </ul>
+ <h4>SubTotal: <%= @total %></h4>
+ <% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
   <%= button_to 'Pay Now', checkout_path, method: :post, class: 'checkout-button' %>
 <% else %>
   <p>No addresses found. Please add an address to continue.</p>
 <% end %>
 
-<!-- app/views/checkout/index.html.erb -->
-<% if flash[:notice] %>
-  <div class="flash-notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
 
 

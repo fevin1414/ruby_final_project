@@ -5,6 +5,7 @@ class CheckoutController < ApplicationController
   def index
     @user = current_user
     @addresses = @user.addresses
+    @total = session[:cart_total]
   end
 
   def create
