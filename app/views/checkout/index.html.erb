@@ -2,13 +2,14 @@
   <h2>Select an Address</h2>
   <% @addresses.each do |address| %>
     <%= radio_button_tag :address_id, address.id %>
-    <%= address.street %>, <%= address.city %>, <%= address.province.name %>
+    <%= address.street %>, <%= address.city %>, <%= address.province&.name %>
     <br>
   <% end %>
   <%= button_tag 'Submit', id: 'address-selection-button' %>
 <% else %>
   <p>No addresses found. Please add an address to continue.</p>
 <% end %>
+
 <script>
   document.getElementById('address-selection-button').addEventListener('click', function() {
     var selectedAddressId = document.querySelector('input[name="address_id"]:checked').value;
