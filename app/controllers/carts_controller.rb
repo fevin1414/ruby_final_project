@@ -9,13 +9,16 @@ class CartsController < ApplicationController
       @shopping_cart = current_user.shopping_cart
       @cart_items = @shopping_cart.cart_items.includes(:product)
       @total = @shopping_cart.total_price
+      # Save products in session
+      session[:cart_products] = @cart_items.map { |item| { id: item.product_id, quantity: item.quantity } }
     else
       @cart_items = @cart.items.keys.map { |product_id| OpenStruct.new(product: Product.find(product_id), quantity: @cart.items[product_id]) }
       @total = @cart.total
+      # Save products in session
+      session[:cart_products] = @cart_items.map { |item| { id: item.product.id, quantity: item.quantity } }
     end
     session[:cart_total] = @total
   end
-
   def add_item
     @cart.add_item(params[:product_id], params[:quantity])
     flash[:notice] = 'Item added to cart successfully!'
