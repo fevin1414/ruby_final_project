@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
-  get 'checkout/index'
-  get 'checkout/create'
+
+#payment routes
+
+scope '/payment' do
+  post 'create', to: 'payment#create', as:'payment_create'
+  get 'cancel', to: 'payment#cancel', as:'payment_cancel'
+  get 'sucess', to: 'payment#sucess', as:'payment_sucess'
+
+
+end
+
+
   get 'carts/show'
+# Checkout routes
+get 'checkout/index', to: 'checkout#index', as: 'index_checkout'
+post 'checkout', to: 'checkout#create'
+get 'checkout/invoice', to: 'checkout#invoice', as: 'invoice_checkout'
 
   root 'application#choose_root_path' # Change the root route to point to choose_root_path
 
@@ -35,8 +49,7 @@ Rails.application.routes.draw do
   # Other routes for your application can be added here.
   get '/contact', to: 'contact_pages#show'
   get '/about', to: 'about_pages#show'
-  get 'checkout', to: 'checkout#index'
-  post 'checkout', to: 'checkout#create'
+
 
   resources :users, only: [:show]
 

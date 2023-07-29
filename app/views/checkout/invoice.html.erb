@@ -1,0 +1,31 @@
+<% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if @address %>
+<h2>Invoice</h2>
+<h2>Invoice</h2>
+<h3>From</h3>
+<h5>Canadian Agri Tech</h5>
+<h5>99 Dalhousie St Nobert</h5>
+<h5>R35 232</h5>
+
+<h2>To </h2>
+<h5><%= @address.street %></h5>
+<h5><%= @address.city %></h5>
+ <h5><%= @address.province.name %></h5>
+
+<% @products.each do |item| %>
+  <p><%= item[:product].name %>: <%= item[:product].price %> (Quantity: <%= item[:quantity] %>)</p>
+<% end %>
+<p>SubTotal: <%= @total %></p>
+
+<p>GST: <%= @gst %></p>
+<p>PST: <%= @pst %></p>
+<p>HST: <%= @hst %></p>
+
+<p>Total: <%= @total + @gst + @pst + @hst %></p>
+
+
+<% end %>

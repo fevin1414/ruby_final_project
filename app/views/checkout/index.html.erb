@@ -1,32 +1,17 @@
-
-<% if flash[:notice] %>
-  <div class="flash-notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-<h1>Select an Address</h1>
 <% if @addresses.any? %>
-  <ul>
-    <% @addresses.each do |address| %>
-      <li>
-        <%= radio_button_tag :address_id, address.id %>
-        <%= address.street %>, <%= address.city %>, <%= address.province.name %>
-      </li>
-    <% end %>
-  </ul>
- </ul>
- <h4>SubTotal: <%= @total %></h4>
- <% if flash[:notice] %>
-  <div class="flash-notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-  <%= button_to 'Pay Now', checkout_path, method: :post, class: 'checkout-button' %>
+  <h2>Select an Address</h2>
+  <% @addresses.each do |address| %>
+    <%= radio_button_tag :address_id, address.id %>
+    <%= address.street %>, <%= address.city %>, <%= address.province.name %>
+    <br>
+  <% end %>
+  <%= button_tag 'Submit', id: 'address-selection-button' %>
 <% else %>
   <p>No addresses found. Please add an address to continue.</p>
 <% end %>
-
-
-
+<script>
+  document.getElementById('address-selection-button').addEventListener('click', function() {
+    var selectedAddressId = document.querySelector('input[name="address_id"]:checked').value;
+    window.location.href = "<%= invoice_checkout_path %>" + "?address_id=" + selectedAddressId;
+  });
+</script>
