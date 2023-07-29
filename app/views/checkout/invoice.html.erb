@@ -27,5 +27,5 @@
 
 <p>Total: <%= @total + @gst + @pst + @hst %></p>
 
-
+<%= button_to 'Pay Now', payment_create_path, method: :post %>
 <% end %>

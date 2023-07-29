@@ -40,6 +40,7 @@ class CheckoutController < ApplicationController
       @pst = @province.pst.present? ? (@total * @province.pst.to_f / 100) : 0
       @hst = @province.hst.present? ? (@total * @province.hst.to_f / 100) : 0
     end
+    session[:products] = @products
   end
 
 
