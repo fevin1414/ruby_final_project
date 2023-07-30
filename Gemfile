@@ -15,6 +15,9 @@ gem 'mini_magick'
 gem 'google-cloud-storage'
 gem 'kaminari'
 gem 'stripe'
+gem 'dotenv-rails', groups: [:development, :test]
+
+
 
 
 

@@ -1,21 +1,20 @@
 Rails.application.routes.draw do
 
-#payment routes
-
-scope '/payment' do
-  post 'create', to: 'payment#create', as:'payment_create'
-  get 'cancel', to: 'payment#cancel', as:'payment_cancel'
-  get 'sucess', to: 'payment#sucess', as:'payment_sucess'
-
-
-end
-
+  #payment routes
+  scope '/payment' do
+    post 'create', to: 'payment#create', as:'payment_create'
+    get 'cancel', to: 'payment#cancel', as:'payment_cancel'
+    get 'success', to: 'payment#success', as: 'payment_success'
+    get 'redirect_action', to: 'payment#redirect_action', as:'payment_redirect'
+  end
+  post 'checkout/stripe_payment', to: 'checkout#stripe_payment', as: 'stripe_payment_checkout'
 
   get 'carts/show'
-# Checkout routes
-get 'checkout/index', to: 'checkout#index', as: 'index_checkout'
-post 'checkout', to: 'checkout#create'
-get 'checkout/invoice', to: 'checkout#invoice', as: 'invoice_checkout'
+
+  # Checkout routes
+  get 'checkout/index', to: 'checkout#index', as: 'index_checkout'
+  post 'checkout', to: 'checkout#create'
+  get 'checkout/invoice', to: 'checkout#invoice', as: 'invoice_checkout'
 
   root 'application#choose_root_path' # Change the root route to point to choose_root_path
 
@@ -38,9 +37,6 @@ get 'checkout/invoice', to: 'checkout#invoice', as: 'invoice_checkout'
   get 'contact_pages/show'
   resources :addresses, only: [:index, :new, :create, :edit, :update, :destroy]
 
-
-
-
   devise_for :users, path: 'users', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
   # Active Admin routes for admin users
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -49,7 +45,6 @@ get 'checkout/invoice', to: 'checkout#invoice', as: 'invoice_checkout'
   # Other routes for your application can be added here.
   get '/contact', to: 'contact_pages#show'
   get '/about', to: 'about_pages#show'
-
 
   resources :users, only: [:show]
 

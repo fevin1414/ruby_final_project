@@ -4,28 +4,32 @@
   </div>
 <% end %>
 <% if @address %>
-<h2>Invoice</h2>
-<h2>Invoice</h2>
-<h3>From</h3>
-<h5>Canadian Agri Tech</h5>
-<h5>99 Dalhousie St Nobert</h5>
-<h5>R35 232</h5>
 
-<h2>To </h2>
-<h5><%= @address.street %></h5>
-<h5><%= @address.city %></h5>
- <h5><%= @address.province.name %></h5>
+  <h2>Invoice</h2>
+  <h3>From</h3>
+  <h5>Canadian Agri Tech</h5>
+  <h5>99 Dalhousie St Nobert</h5>
+  <h5>R35 232</h5>
 
-<% @products.each do |item| %>
-  <p><%= item[:product].name %>: <%= item[:product].price %> (Quantity: <%= item[:quantity] %>)</p>
-<% end %>
-<p>SubTotal: <%= @total %></p>
+  <h2>To </h2>
+  <h5><%= @address.street %></h5>
+  <h5><%= @address.city %></h5>
+  <h5><%= @address.province.name %></h5>
 
-<p>GST: <%= @gst %></p>
-<p>PST: <%= @pst %></p>
-<p>HST: <%= @hst %></p>
+  <%= form_with url: stripe_payment_checkout_path, method: :post do |form| %>
+    <% @products.each do |item| %>
+      <p><%= item[:name] %>: <%= item[:price] %> (Quantity: <%= item[:quantity] %>)</p>
+    <% end %>
 
-<p>Total: <%= @total + @gst + @pst + @hst %></p>
+    <p>SubTotal: <%= @total %></p>
 
-<%= button_to 'Pay Now', payment_create_path, method: :post %>
+    <p>GST: <%= @gst %></p>
+    <p>PST: <%= @pst %></p>
+    <p>HST: <%= @hst %></p>
+
+    <p>Total: <%= @total_with_taxes = @total + @gst + @pst + @hst %></p>
+    <%= form.hidden_field :total_with_taxes, value: @total_with_taxes %>
+    <%= form.submit 'Pay Now' %>
+  <% end %>
+
 <% end %>

@@ -1,35 +1,15 @@
 class PaymentController < ApplicationController
-
-  def create
-    # Retrieve product data from the session
-    @products = session[:products]
-
-    # Construct line_items for Stripe from the product data
-    line_items = @products.map do |item|
-      {
-        name: item[:product].name,
-        amount: item[:product].price_cents,
-        currency: 'cad',
-        quantity: item[:quantity]
-      }
-    end
-
-    # Set up a Stripe session
-    @session = Stripe::Payment::Session.create(
-      payment_method_types: ['card'],
-      line_items: line_items,
-      success_url: payment_success_url,
-      cancel_url: payment_cancel_url
-    )
+  def redirect_action
+    # Retrieve the Stripe Checkout session URL from the session
+    @checkout_session_url = session[:stripe_checkout_session_url]
+    session.delete(:stripe_checkout_session_url)
   end
 
-  def sucess
-
+  def success
+    # Handle the success callback here
   end
 
   def cancel
-
+    # Handle the cancel callback here
   end
 end
-
-
