@@ -1,5 +1,5 @@
 class AboutPage < ApplicationRecord
-  def self.ransackable_attributes(auth_object = nil)
-    ["content", "created_at", "id", "updated_at"]
-  end
+  validates :content, presence: true
+  validates :created_at, presence: true
+  validates :updated_at, presence: true
 end

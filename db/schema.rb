@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_034050) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_03_091603) do
   create_table "about_pages", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -124,6 +124,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_034050) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id", null: false
+    t.decimal "subtotal"
+    t.decimal "gst"
+    t.decimal "pst"
+    t.decimal "hst"
+    t.decimal "total_with_taxes"
+    t.json "product_data"
+    t.index ["order_id"], name: "index_customers_on_order_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -132,6 +150,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_034050) do
     t.integer "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "new"
+    t.string "payment_id"
   end
 
   create_table "product_images", force: :cascade do |t|
@@ -203,6 +223,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_034050) do
   add_foreign_key "cart_items", "products"
   add_foreign_key "cart_items", "shopping_carts"
   add_foreign_key "cart_items", "shopping_carts", column: "cart_id"
+  add_foreign_key "customers", "orders"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
   add_foreign_key "product_images", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "reviews", "products"

@@ -1,6 +1,7 @@
 ActiveAdmin.register Product do
   permit_params :name, :description, :price, :stock, :category_id, :on_sale,
                 :newly_added, :recently_updated, product_images_attributes: [:id, :image, :_destroy]
+                filter :orders_id_eq, label: 'Order ID'
 
   form do |f|
     f.inputs 'Product Details' do
@@ -10,8 +11,7 @@ ActiveAdmin.register Product do
       f.input :stock
       f.input :category
       f.input :on_sale, label: 'On Sale'
-      f.input :newly_added, label: 'Newly Added'
-      f.input :recently_updated, label: 'Recently Updated'
+
       f.has_many :product_images, allow_destroy: true do |image|
         image.input :image, as: :file, input_html: { accept: 'image/*' }
       end

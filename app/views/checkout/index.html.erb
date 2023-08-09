@@ -1,17 +1,25 @@
-<% if @addresses.any? %>
-  <h2>Select an Address</h2>
-  <% @addresses.each do |address| %>
-    <%= radio_button_tag :address_id, address.id %>
-    <%= address.street %>, <%= address.city %>, <%= address.province.name %>
-    <br>
-  <% end %>
-  <%= button_tag 'Submit', id: 'address-selection-button' %>
-<% else %>
-  <p>No addresses found. Please add an address to continue.</p>
+<% if flash[:notice] %>
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
 <% end %>
-<script>
-  document.getElementById('address-selection-button').addEventListener('click', function() {
-    var selectedAddressId = document.querySelector('input[name="address_id"]:checked').value;
-    window.location.href = "<%= invoice_checkout_path %>" + "?address_id=" + selectedAddressId;
-  });
-</script>
+
+<% if @address %>
+  <h2>Edit Your Shipping Address</h2>
+<% else %>
+  <h2>Enter Your Shipping Address</h2>
+<% end %>
+
+<%= form_with model: [@user, @address || Address.new], url: address_path, method: :post do |form| %>
+  <%= form.label :street %>
+  <%= form.text_field :street, value: @address&.street %>
+
+  <%= form.label :city %>
+  <%= form.text_field :city, value: @address&.city %>
+
+  <%= form.label :province %>
+  <%= form.collection_select :province_id, Province.all, :id, :name, selected: @address&.province_id %>
+
+  <%= form.submit 'Save Address' %>
+<% end %>
+

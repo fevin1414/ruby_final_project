@@ -16,6 +16,8 @@ gem 'google-cloud-storage'
 gem 'kaminari'
 gem 'stripe'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'stripe_event'
+
 
 
 

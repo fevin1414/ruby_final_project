@@ -1,22 +1,25 @@
 <h1>Available Products</h1>
-<%= form_with(url: products_path, method: "get") do %>
-  <%= label_tag(:keyword, "Search for:") %>
-  <%= text_field_tag(:keyword, params[:keyword]) %>
 
-  <%= label_tag(:category, "Category:") %>
-  <%= select_tag(:category, options_for_select([['All Products', nil]] + Category.all.map { |c| [c.name, c.id] }, selected: params[:category] || nil)) %>
+<%= form_with(url: products_path, method: "get", id: "product-filter-form") do |form| %>
+  <%= form.label(:filter, "Filter by:") %>
+  <%= form.select(:filter, options_for_select([['None', nil], ['On Sale', 'on_sale'], ['Newly Added', 'newly_added'], ['Recently Updated', 'recently_updated']], selected: params[:filter])) %>
 
-  <%= label_tag(:on_sale, "On Sale") %>
-  <%= check_box_tag(:on_sale, true, params[:on_sale].present?) %>
-
-  <%= label_tag(:newly_added, "Newly Added") %>
-  <%= check_box_tag(:newly_added, true, params[:newly_added].present?) %>
-
-  <%= label_tag(:recently_updated, "Recently Updated") %>
-  <%= check_box_tag(:recently_updated, true, params[:recently_updated].present?) %>
-
-  <%= submit_tag("Search") %>
+  <%= form.submit("Filter", class: "filter-button") %>
 <% end %>
+
+<%= form_with(url: products_path, method: "get", id: "product-search-form") do |form| %>
+  <%= form.label(:keyword, "Search for:") %>
+  <%= form.text_field(:keyword, value: params[:keyword]) %>
+  <%= form.label(:category, "Category:") %>
+  <%= form.select(:category, options_for_select([['All Products', nil]] + Category.all.map { |c| [c.name, c.id] }, selected: params[:category])) %>
+
+  <%= form.hidden_field(:on_sale, value: params[:on_sale]) %>
+  <%= form.hidden_field(:newly_added, value: params[:newly_added]) %>
+  <%= form.hidden_field(:recently_updated, value: params[:recently_updated]) %>
+
+  <%= form.submit("Search", class: "search-button") %>
+<% end %>
+
 
 
 <table>

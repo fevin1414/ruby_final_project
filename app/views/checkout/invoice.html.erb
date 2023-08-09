@@ -17,19 +17,29 @@
   <h5><%= @address.province.name %></h5>
 
   <%= form_with url: stripe_payment_checkout_path, method: :post do |form| %>
-    <% @products.each do |item| %>
-      <p><%= item[:name] %>: <%= item[:price] %> (Quantity: <%= item[:quantity] %>)</p>
-    <% end %>
-
-    <p>SubTotal: <%= @total %></p>
-
-    <p>GST: <%= @gst %></p>
-    <p>PST: <%= @pst %></p>
-    <p>HST: <%= @hst %></p>
-
-    <p>Total: <%= @total_with_taxes = @total + @gst + @pst + @hst %></p>
-    <%= form.hidden_field :total_with_taxes, value: @total_with_taxes %>
-    <%= form.submit 'Pay Now' %>
+  <% @products.each_with_index do |item, index| %>
+    <p><%= item[:name] %>: <%= item[:price] %> (Quantity: <%= item[:quantity] %>)</p>
+    <%= form.hidden_field "products[#{index}][name]", value: item[:name] %>
+    <%= form.hidden_field "products[#{index}][price]", value: item[:price] %>
+    <%= form.hidden_field "products[#{index}][quantity]", value: item[:quantity] %>
   <% end %>
+
+  <p>SubTotal: <%= @total %></p>
+
+  <p>GST: <%= @gst %></p>
+  <%= form.hidden_field :gst, value: @gst %>
+
+  <p>PST: <%= @pst %></p>
+  <%= form.hidden_field :pst, value: @pst %>
+
+  <p>HST: <%= @hst %></p>
+  <%= form.hidden_field :hst, value: @hst %>
+
+  <p>Total: <%= @total_with_taxes = @total + @gst + @pst + @hst %></p>
+  <%= form.hidden_field :total_with_taxes, value: @total_with_taxes %>
+
+  <%= form.submit 'Pay Now' %>
+<% end %>
+
 
 <% end %>

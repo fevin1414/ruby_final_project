@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'checkout/index', to: 'checkout#index', as: 'index_checkout'
   post 'checkout', to: 'checkout#create'
   get 'checkout/invoice', to: 'checkout#invoice', as: 'invoice_checkout'
+  get 'checkout/payment_success', to: 'checkout#payment_success', as: 'checkout_payment_success'
 
   root 'application#choose_root_path' # Change the root route to point to choose_root_path
 
@@ -23,6 +24,11 @@ Rails.application.routes.draw do
       get :view_in_3d
     end
   end
+  mount StripeEvent::Engine, at: '/stripe/webhooks'
+ # config/routes.rb
+post '/stripe_webhooks', to: 'stripe_webhooks#create'
+get 'payment_success', to: 'checkout#payment_success'
+
 
   resources :categories, only: [:show]
   resource :cart, only: [:show] do
