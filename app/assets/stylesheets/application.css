@@ -1,15 +1,797 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/* Add these styles to your application.css file */
+
+.nav {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  background-color: #020508;
+  color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.nav-item {
+  padding: 10px 20px;
+  position: relative;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-item a:hover {
+  color: #f0f0f0;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: black;
+  color: white;
+  border: 1px solid #a1a1a1;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.nav-item .dropdown-menu:hover {
+  display: block;
+}
+
+body {
+  background-color: #f4f4f4;
+}
+/* Add these styles to your application.css file */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.product-search-form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 -10px;
+}
+
+.col-md-4 {
+  padding: 10px;
+  flex: 0 0 calc(33.33% - 20px);
+}
+.card {
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-img-top {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 16px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #020508;
+  border-color: #020508;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #10161a;
+  border-color: #10161a;
+}
+
+/* Your existing styles */
+
+/* Style for logout button */
+.btn-glow {
+  text-decoration: none;
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+  color: #f0f0f0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+.btn-logout {
+  margin-top: 1px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+
+}
+.product-page h1 {
+  color: #020508;
+  font-size: 32px;
+}
+/* Add these styles to your application.css file */
+
+.product-page .main-image-container img.img-fluid {
+  max-height: 400px;
+  max-width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.related-images img.related-image {
+  max-width: calc(20% - 10px); /* This divides the row into 5 images. Adjust as needed. */
+  margin-right: 10px; /* spacing between images */
+  object-fit: cover;
+}
+
+/* This ensures the last image has no right margin */
+.related-images img.related-image:last-child {
+  margin-right: 0;
+}
+.carousel .carousel-item img {
+  max-height: 250px;
+  max-width: 500px; /* Increase height for related images */
+  margin: auto;
+}
+
+/* Rest of the code remains the same */
+
+
+.product-page .product-description,
+.product-page .product-price,
+.product-page .product-stock {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product-page .main-image {
+  width: 100%;
+  object-fit: contain;
+}
+
+.product-page .placeholder-image {
+  background-color: #a1a1a1;
+}
+
+.product-page .table-dark {
+  background-color: #020508;
+}
+
+.product-page .table-dark td {
+  padding: 5px;
+  text-align: center;
+}
+
+.add-to-cart-form .btn-primary {
+  width: auto;
+}
+.product-search-form label {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.product-search-form select,
+.product-search-form input[type="text"],
+.product-search-form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.product-search-form select,
+.product-search-form input[type="text"] {
+  padding: 5px 10px;
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+}
+
+.product-search-form input[type="submit"] {
+  background-color: #020508;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-search-form input[type="submit"]:hover {
+  background-color: #10161a;
+}
+.flash-notice {
+  text-align: center;
+  background-color: #ffeb3b;
+  color: #333;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Cart page styles */
+.cart-page h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.cart-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cart-page th,
+.cart-page td {
+  padding: 10px;
+  border: 1px solid #a1a1a1;
+  text-align: center;
+}
+
+.cart-page .checkout-button,
+.cart-page .login-button {
+  background-color: #020508;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  display: block;
+  margin: 0 auto;
+  transition: background-color 0.3s;
+}
+
+.cart-page .checkout-button:hover,
+.cart-page .login-button:hover {
+  background-color: #10161a;
+}
+.user-profile h1 {
+  text-align: center;
+  margin: 40px 0;
+  font-weight: bold;
+  color: #020508;
+}
+
+.user-profile h2 {
+  text-align: left;
+  margin: 20px 0;
+  font-weight: bold;
+  color: #020508;
+}
+
+.user-profile p {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.user-profile .addresses div {
+  border: 1px solid #a1a1a1;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile .addresses p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.user-profile a {
+  color: #020508;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.user-profile a:hover {
+  color: #10161a;
+}
+
+.user-profile .button-to {
+  background-color: #020508;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.user-profile .button-to:hover {
+  background-color: #10161a;
+}
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #a1a1a1;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.actions {
+  text-align: center;
+}
+
+.btn-login {
+  background-color: #020508;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #10161a;
+}.registration-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.registration-form {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px; /* Adjust the width as needed */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.registration-form .field {
+  margin-bottom: 20px;
+}
+
+.registration-form .actions {
+  margin-top: 20px;
+}
+
+.registration-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.registration-form input[type="submit"] {
+  background-color: #020508;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.registration-form input[type="submit"]:hover {
+  background-color: #10161a;
+}
+.contact-page {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  /* Add other styles as needed */
+}
+/* Responsive styles */
+.category-products h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.category-products .products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.category-products .product {
+  flex: 0 0 calc(50% - 20px);  /* Four products per row */
+  padding: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #a1a1a1;
+  background-color: #ffffff;
+}
+
+.category-products .placeholder-image {
+  width: 150px; /* Adjust the image width as needed */
+  height: 150px; /* Adjust the image height as needed */
+  object-fit: cover;
+}
+
+.category-products .product h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.category-products .product h2 a {
+  text-decoration: none;
+  color: #020508;
+}
+
+.category-products .product h2 a:hover {
+  color: #10161a;
+}
+.address-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px auto; /* Set margin auto to horizontally center */
+  width: 300px;
+  text-align: center; /* Align text inside the container */
+}
+.invoice-button {
+  display: inline-block;
+  background-color: #020508;
+  border: none;
+  color: white;
+  margin-top: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.invoice-button:hover {
+  background-color: #10161a;
+}
+/* Additional styles for form content inside address-container */
+.address-container form {
+  margin-top: 20px;
+}
+
+.address-container h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.address-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.address-container input[type="text"],
+.address-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.address-container input[type="submit"] {
+  background-color: #020508;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.address-container input[type="submit"]:hover {
+  background-color: #10161a;
+}
+
+
+/* Specific styles for a heading inside the address container */
+.address-container h2 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* Specific styles for a paragraph inside the address container */
+.address-container p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Specific styles for a link inside the address container */
+.address-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Adding styles for list items inside the address container */
+.address-container ul li {
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+.invoice-page {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.invoice-page h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #020508;
+  margin-bottom: 20px;
+}
+
+.invoice-page h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #020508;
+  margin: 10px 0;
+}
+
+.invoice-page h5 {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.invoice-page h6 {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.invoice-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.invoice-page th,
+.invoice-page td {
+  padding: 10px;
+  border: 1px solid #a1a1a1;
+  text-align: center;
+}
+
+.invoice-page table th {
+  background-color: #020508;
+  color: white;
+}
+
+.invoice-page .summary h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #020508;
+  margin-top: 20px;
+}
+
+.invoice-page .summary p {
+  font-size: 18px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.invoice-page .invoice-button {
+  display: inline-block;
+  background-color: #020508;
+  border: none;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.invoice-page .invoice-button:hover {
+  background-color: #10161a;
+}
+.jumbotron {
+  background-color: #f0f0f0;
+  padding: 50px 0;
+}
+.content-section {
+  padding: 40px 0;
+  border-top: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+.content-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.content-section p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style the pagination links */
+.pagination a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+/* Style the active pagination link */
+.pagination .active {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+}
+
+/* Style the disabled pagination link */
+.pagination .disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.content-section {
+  text-align: center;
+}
+.contact-page {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.contact-page .title {
+  color: #333;
+}
+
+.contact-page .content {
+  font-size: 16px;
+  color: #666;
+}
+
+.para{
+text-align: center;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+   width: 70%; /* Adjust this percentage as needed */
+  margin: auto;
+  }
+
+  .nav-item {
+    padding: 10px 0;
+    text-align: center;
+    width:100%;
+    box-sizing: border-box;
+  }
+
+  .dropdown-menu {
+    position: static;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    display: none;
+    width: 100%;
+  }
+
+  .nav-item:hover .dropdown-menu,
+  .nav-item .dropdown-menu:hover {
+    display: none;
+  }
+
+  .product-search-form {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+.product-page .row {
+  flex-direction: column;
+}
+.cart-page th,
+  .cart-page td {
+    padding: 5px;
+  }
+  .flash-notice {
+    text-align: center;
+    background-color: #ffeb3b;
+    color: #333;
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .registration-form {
+    padding: 10px;
+  }
+  .registration-form .field,
+  .registration-form .actions {
+    margin-bottom: 10px;
+  }
+  .product {
+    flex: 0 0 calc(50% - 20px); /* Two products per row on small screens */
+  }
+  .invoice-page table {
+    font-size: 14px;
+  }
+
+  .invoice-page th,
+  .invoice-page td {
+    padding: 5px;
+  }
+/* Your existing styles */

@@ -2,49 +2,46 @@
 <html>
   <head>
     <title>CanadianAgriTech</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track" => "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <nav>
-      <ul>
-       <li><%= link_to "Contact", contact_path %></li>
-    <li><%= link_to "About", about_path %></li>
-       <li><%= link_to "Admin", admin_root_path %></li>
+      <ul class="nav">
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "Home", user_dashboard_path %></li>
+          <li class="nav-item">
+            <%= form_tag(destroy_user_session_path, method: :delete) do %>
+              <%= button_tag "Logout", type: :submit, class: "btn btn-link nav-link btn-glow btn-logout", "data-disable-with" => "Logout" %>
+            <% end %>
+          </li>
+          <li class="nav-item"><%= link_to "Profile", user_path(current_user) %></li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Login", new_user_session_path %></li>
 
-        <li class="product">
-          <%= link_to "Products", products_path %>
-        </li>
-        <li class="dropdown">
-          <%= link_to "Categories", "#", class: "dropdown-toggle", data: { toggle: "dropdown" } %>
+          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% end %>
+        <li class="nav-item"><%= link_to "Contact", contact_path %></li>
+        <li class="nav-item"><%= link_to "About", about_path %></li>
+        <li class="nav-item"><%= link_to "Products", products_path %></li>
+        <li class="nav-item dropdown">
+          <%= link_to "Categories", "#", class: "dropdown-toggle" %>
           <ul class="dropdown-menu">
             <% Category.all.each do |category| %>
-              <li><%= link_to category.name, category_path(category) %></li>
+              <li class="dropdown-item"><%= link_to category.name, category_path(category) %></li>
             <% end %>
           </ul>
         </li>
-        <li><%= link_to "Cart", cart_path %></li> <!-- Add this line -->
-<% if user_signed_in? %>
-      <li><%= link_to "Home", user_dashboard_path %></li>
-      <%= form_for(:user, url: destroy_user_session_path, method: :delete) do |f| %>
-        <%= f.submit "Logout" %>
-      <% end %>
-      <li><%= link_to "Profile", user_path(current_user) %></li>
-    <% else %>
-      <li><%= link_to "Login", new_user_session_path %></li>
-      <li><%= link_to "Sign Up", new_user_registration_path %></li>
-    <% end %>
+        <li class="nav-item"><%= link_to "Cart", cart_path %></li>
+        <li class="nav-item"><%= link_to "Admin", admin_root_path %></li>
         <!-- Add other navigation items as needed -->
       </ul>
     </nav>
-<% @breadcrumbs&.each do |breadcrumb| %>
-  <%= link_to breadcrumb[:name], breadcrumb[:url] %> >
-<% end %>
 
     <%= yield %>
   </body>

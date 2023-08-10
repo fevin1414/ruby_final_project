@@ -1,15 +1,16 @@
-<h1>Products Belonging to <%= @category.name %></h1>
-<div class="products">
-  <% @products.each do |product| %>
-    <div class="product">
-      <% if product.product_images.present? %>
-        <%= image_tag product.product_images.first.image.url(:thumbnail) %>
-      <% else %>
-        <%= image_tag 'https://lorempixel.com/200/200/', class: 'placeholder-image' %>
+ <div class="category-products">
+    <h1>Products Belonging to <%= @category.name %></h1>
+    <div class="products">
+      <% @products.each do |product| %>
+        <div class="product">
+          <% if product.product_images.present? %>
+            <%= image_tag product.product_images.first.image.url(:thumbnail) %>
+          <% else %>
+            <%= image_tag 'https://lorempixel.com/200/200/', class: 'placeholder-image' %>
+          <% end %>
+          <h2><%= link_to product.name, product_path(product) %></h2>
+        </div>
       <% end %>
-      <h2><%= link_to product.name, product_path(product) %></h2>
-
+      <%= paginate @products %>
     </div>
-  <% end %>
-  <%= paginate @products %>
-</div>
+  </div>

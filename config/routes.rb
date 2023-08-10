@@ -3,6 +3,22 @@ Rails.application.routes.draw do
   get 'checkout/create'
   get 'carts/show'
 
+  get 'checkout/address', to: 'checkout#address'
+  post 'checkout/create_address', to: 'checkout#create_address'
+  patch 'checkout/update_address/:id', to: 'checkout#update_address', as: 'update_address'
+  get 'checkout/invoice', to: 'checkout#invoice' # Add this line to handle the invoice view
+  post 'checkout/pay_now', to: 'checkout#pay_now', as: 'pay_now_checkout'
+
+
+  resources :guest_checkout, only: [] do
+    collection do
+      get 'new_address'
+      post 'create_address', as: 'create_address'
+      get 'invoice', to: 'guest_checkout#invoice', as: 'invoice' # <-- Fixed this line
+    end
+  end
+
+
   root 'application#choose_root_path' # Change the root route to point to choose_root_path
 
   resources :products, only: [:index, :show] do

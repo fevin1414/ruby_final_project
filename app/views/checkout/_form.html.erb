@@ -1,0 +1,12 @@
+<%= f.label :street %>
+<%= f.text_field :street %><br>
+
+<%= f.label :city %>
+<%= f.text_field :city %><br>
+
+<%= f.label :province %>
+<%= f.collection_select :province_id, Province.all, :id, :name %><br>
+
+
+<%= f.hidden_field :user_id, value: current_user&.id if user_signed_in? %>
+

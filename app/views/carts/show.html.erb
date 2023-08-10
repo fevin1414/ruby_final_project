@@ -1,12 +1,15 @@
-<% if flash[:notice] %>
-  <div class="flash-notice">
+<div class="flash-notice">
+  <% if flash[:notice].present? %>
     <%= flash[:notice] %>
-  </div>
-<% end %>
+  <% else %>
+    Canadian Agri Tech
+  <% end %>
+</div>
 
-<h1>Your Cart</h1>
-<% if @products.any? %>
-  <table>
+<div class="cart-page">
+  <h1>Your Cart</h1>
+  <% if @products.any? %>
+    <table class="table">
     <!-- Cart table code here -->
     <thead>
       <tr>
@@ -44,13 +47,17 @@
 
   <h2>Total: <%= @cart.total %></h2>
 
-  <% if user_signed_in? %>
-    <p>User ID: <%= current_user.id %></p>
-    <%= button_to 'Checkout', checkout_path, method: :post, class: 'checkout-button' %>
-  <% else %>
-    <p>Please log in to view your address and card details.</p>
-    <%= button_to 'Login', new_user_session_path, class: 'login-button' %>
-  <% end %>
+
+
+
+<% if user_signed_in? %>
+  <%= button_to 'Proceed to Pay', checkout_address_path, method: :get, class: 'address-button' %>
+<% else %>
+<%= link_to 'Proceed as Guest', new_address_guest_checkout_index_path, class: 'address-button' %>
+
+<% end %>
+
+
 <% else %>
   <p>Your cart is empty. Please add products to the cart.</p>
 

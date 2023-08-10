@@ -1,0 +1,16 @@
+<div class="address-container">
+  <% if user_signed_in? && @address.persisted? %>
+    <%= form_for @address, url: update_address_path(@address), method: :patch do |f| %>
+      <h1>Edit Address</h1>
+      <%= render 'form', f: f %>
+      <%= f.submit "Update" %>
+    <% end %>
+  <% else %>
+    <%= form_for @address, url: { action: 'create_address' }, method: :post do |f| %>
+      <h1>Add Address</h1>
+      <%= render 'form', f: f %>
+      <%= f.submit "Save" %>
+    <% end %>
+  <% end %>
+  <%= link_to 'Proceed to Invoice', checkout_invoice_path(province_id: @address.province_id), class: 'invoice-button' %>
+</div>

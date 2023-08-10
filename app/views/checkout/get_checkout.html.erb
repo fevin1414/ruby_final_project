@@ -1,0 +1,9 @@
+<%= form_with url: create_address_guest_checkout_index_path, method: :post, local: true do |form| %>
+  <% address_fields = { street: nil, city: nil, province_id: nil } %>
+  <%= form.fields_for :address, OpenStruct.new(address_fields) do |a| %>
+    <%= a.text_field :street, placeholder: 'Street' %>
+    <%= a.text_field :city, placeholder: 'City' %>
+    <%= a.select :province_id, Province.all.collect { |p| [p.name, p.id] } %>
+  <% end %>
+  <%= form.submit "Continue to Payment" %>
+<% end %>

@@ -1,0 +1,59 @@
+ <%= form_with url: pay_now_checkout_path, method: :post do %>
+ <div class="invoice-page">
+    <h1>Invoice</h1>
+    <h3>From</h3>
+    <h5>Canadian Agri Tech</h5>
+    <h6>2915 Pembina hwy</h6>
+    <h6>R3c 1Y9</h6>
+    <h6>204 888 2822</h6>
+    <h3>To</h3>
+    <% if user_signed_in? %>
+
+        <h6>Name: <%= current_user.name %></h6>
+        <h6> Email: <%= current_user.email %></h6>
+      <% elsif current_user.name.present? %>
+        <h6>Name: <%= current_user.name %></h6>
+      <% elsif current_user.email.present? %>
+        <h6>Email: <%= current_user.email %></h6>
+      <% end %>
+
+
+    <h5><%= @address.street %></h5>
+    <h6><%= @address.city %>, <%= @address.province.name %></h6>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart.each do |item| %>
+          <tr>
+            <td><%= item[:product].name %></td>
+            <td><%= item[:quantity] %></td>
+            <td><%= number_to_currency(item[:price]) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h2>Summary</h2>
+    <p>PST: <%= number_to_currency(@pst) %></p>
+    <p>GST: <%= number_to_currency(@gst) %></p>
+    <p>HST: <%= number_to_currency(@hst) %></p>
+    <p>Total: <%= number_to_currency(@total + @tax) %></p>
+     <%= hidden_field_tag :total, @total %>
+  <%= hidden_field_tag :pst, @pst %>
+  <%= hidden_field_tag :gst, @gst %>
+  <%= hidden_field_tag :hst, @hst %>
+  <%= hidden_field_tag :tax, @tax %>
+  <%= hidden_field_tag :province_id, @address.province_id %>
+  <%= hidden_field_tag :cart, @cart.to_json %>
+
+  <%= submit_tag 'Pay Now', class: 'invoice-button' %>
+
+  </div>
+  <% end %>

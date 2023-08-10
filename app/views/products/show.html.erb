@@ -1,35 +1,36 @@
-<h1><%= @product.name %></h1>
-<p>Description: <%= @product.description %></p>
-<p>Price: <%= @product.price %></p>
-<p>Available Stock: <%= @product.stock %></p>
+<div class="container product-page">
+    <h1><%= @product.name %></h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="main-image-container">
+                <% if @product.product_images.any? %>
+                    <%= image_tag @product.product_images.first.image.url(:thumbnail), class: "img-fluid main-image" %>
+                <% else %>
+                    <img src="https://lorempixel.com/200/200/" class="img-fluid main-image placeholder-image">
+                <% end %>
+            </div>
 
-<% if @product.product_images.any? %>
-  <%= image_tag @product.product_images.first.image.url(:thumbnail) %>
-<% else %>
-  <img src="https://lorempixel.com/200/200/" class="placeholder-image">
-<% end %>
+            <!-- Section for related images -->
+            <div class="related-images mt-3 d-flex justify-content-between">
+                <% @product.product_images.drop(1).each do |img| %>
+                    <%= image_tag img.image.url(:thumbnail), class: "related-image" %>
+                <% end %>
+            </div>
+        </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @product.product_images.drop(1).each do |img| %>
-      <tr>
-        <td><%= image_tag img.image.url(:thumbnail) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <div class="col-md-6">
+            <p class="product-description">Description: <%= @product.description %></p>
+            <p class="product-price">Price: <%= @product.price %></p>
+            <p class="product-stock">Available Stock: <%= @product.stock %></p>
 
-<% if @product.product_images.drop(1).empty? %>
-  <img src="https://lorempixel.com/200/200/" class="placeholder-image">
-<% end %>
-
-<%= form_with(url: add_item_cart_path, method: :post) do |form| %>
-  <%= form.hidden_field :product_id, value: @product.id %>
-  <%= form.number_field :quantity, value: 1, min: 1 %>
-  <%= form.submit 'Add to Cart' %>
-<% end %>
+            <%= form_with(url: add_item_cart_path, method: :post, html: {class: "add-to-cart-form"}) do |form| %>
+                <%= form.hidden_field :product_id, value: @product.id %>
+                <div class="input-group mb-3">
+                    <%= form.label :quantity, "Quantity:", class: "input-group-text" %>
+                    <%= form.number_field :quantity, value: 1, min: 1, class: "form-control" %>
+                </div>
+                <%= form.submit 'Add to Cart', class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>

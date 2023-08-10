@@ -1,0 +1,46 @@
+<div class="invoice-page">
+  <h1>Invoice</h1>
+   <h3>From</h3>
+    <h5>Canadian Agri Tech</h5>
+    <h6>2915 Pembina hwy</h6>
+    <h6>R3c 1Y9</h6>
+    <h6>204 888 2822</h6>
+
+
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    <% @cart_items.each do |id, quantity| %>
+      <% product = Product.find(id) %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= quantity %></td>
+        <td><%= number_to_currency(product.price.to_f * quantity.to_f) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="2">Subtotal:</td>
+      <td><%= number_to_currency(@total) %></td>
+    </tr>
+    <tr>
+      <td colspan="2">PST:</td>
+      <td><%= number_to_currency(@pst) %></td>
+    </tr>
+    <tr>
+      <td colspan="2">GST:</td>
+      <td><%= number_to_currency(@gst) %></td>
+    </tr>
+    <tr>
+      <td colspan="2">HST:</td>
+      <td><%= number_to_currency(@hst) %></td>
+    </tr>
+    <tr>
+      <td colspan="2">Total:</td>
+      <td><%= number_to_currency(@total + @pst + @gst + @hst) %></td>
+    </tr>
+  </table>
+  <%= link_to 'Pay Now', pay_now_checkout_path, method: :post, class: 'invoice-button' %>
+</div>

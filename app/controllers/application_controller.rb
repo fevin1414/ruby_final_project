@@ -23,7 +23,9 @@ class ApplicationController < ActionController::Base
       user_dashboard_path
     end
   end
-
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name]) # Allow 'name' attribute during sign up
+  end
   def after_sign_out_path_for(resource_or_scope)
     users_path # Use the correct route helper method: users_path
   end
