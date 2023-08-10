@@ -112,11 +112,7 @@ class CheckoutController < ApplicationController
       end
     end
 
-    session[:cart] = []
-
     # Redirect to a success page or whatever you want to do next
-    flash[:notice] = "Order processed successfully!"
-    redirect_to success_path
   rescue => e
     flash[:alert] = "An error occurred while processing the order: #{e.message}"
     redirect_to checkout_path

@@ -13,7 +13,8 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    @cart.add_item(params[:product_id], params[:quantity])
+    @cart.add_item(params[:product_id].to_i, params[:quantity])
+
     flash[:notice] = 'Item added to cart successfully!'
     redirect_to cart_path(product_id: @product.id)  # Updated
   end
